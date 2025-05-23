@@ -1,122 +1,43 @@
 import streamlit as st
-from PIL import Image
-import os
 
-st.set_page_config(page_title="TASTE pro", layout="wide")
+# 페이지 설정
+st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
-# ----------- CSS 스타일 -----------
+# 상단 네비게이션
+with st.container():
+    cols = st.columns([1, 1, 1, 4, 1])
+    with cols[0]:
+        st.markdown("[Works](#)")
+    with cols[1]:
+        st.markdown("[About](#)")
+    with cols[2]:
+        st.markdown("[Contact](#)")
+    with cols[3]:
+        st.markdown("<h3 style='text-align: center;'>Ye Eun.</h3>", unsafe_allow_html=True)
+    with cols[4]:
+        st.text_input("Search")
+
+st.markdown("---")
+
+# 이미지 갤러리
+with st.container():
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.image("image1.jpg", use_column_width=True)
+    with col2:
+        st.image("image2.jpg", use_column_width=True)
+    with col3:
+        st.image("image3.jpg", use_column_width=True)
+    with col4:
+        st.image("image4.jpg", use_column_width=True)
+
+st.markdown("---")
+
+# 자기소개 텍스트
 st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-body, html {
-    font-family: 'Roboto', sans-serif;
-}
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid #eee;
-}
-.menu {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-.menu a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
-}
-.menu a:hover {
-    color: #f76c5e;
-}
-.icons img {
-    margin-left: 15px;
-    width: 22px;
-}
-.banner {
-    display: flex;
-    padding: 60px 40px;
-    background: #fff5f0;
-    border-radius: 15px;
-    margin: 30px;
-}
-.banner-text {
-    flex: 1;
-    padding-right: 40px;
-}
-.banner-text h1 {
-    font-size: 32px;
-}
-.banner-text p {
-    font-size: 16px;
-    color: #555;
-}
-.banner-button {
-    background-color: #f76c5e;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 20px;
-}
-.card-container {
-    display: flex;
-    justify-content: space-around;
-    margin: 50px 40px;
-}
-.card {
-    background-color: #fff1ea;
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    width: 45%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-.card img {
-    width: 100%;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
-footer {
-    background-color: #fefefe;
-    padding: 30px 40px;
-    border-top: 1px solid #ddd;
-    margin-top: 40px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
-}
-</style>
+<h2 style='text-align: center;'>Ye Eun Kim.</h2>
+<p style='text-align: center;'>
+Yeeun Kim is a designer based in Seoul, Korea. Interested in photography, video, typography, and branding.<br>
+Majoring visual communication design at Hongik University.
+</p>
 """, unsafe_allow_html=True)
-
-# ----------- 이미지 경로 로드 -----------
-def load_image(name):
-    return Image.open(os.path.join("images", name))
-
-# ----------- 헤더 네비게이션 -----------
-col1, col2, col3 = st.columns([1, 6, 1])
-with col1:
-    st.image(load_image("logo.png"), width=120)
-with col2:
-    st.markdown("""
-    <div class="menu">
-        <a href="#">카테고리</a>
-        <a href="#">신상품</a>
-        <a href="#">베스트</a>
-        <a href="#">리뷰</a>
-        <a href="#">이벤트</a>
-        <a href="#">테이스트포 소개</a>
-    </div>
-    """, unsafe_allow_html=True)
-with col3:
-    st.markdown("""
-    <div class="icons">
-        <img src="images/icon_search.png">
-        <img src="images/icon_cart.png">
-        <img src="images/icon_user.png">
-    </div>
-    """, unsafe_allow_html=True)
