@@ -1,87 +1,62 @@
 import streamlit as st
-# 페이지 세팅
+from PIL import Image
+import base64
+
+# 페이지 설정
 st.set_page_config(page_title="TASTE pro", layout="wide")
 
-# CSS 삽입
+# SF Pro 폰트 적용 (base64로 가져올 수도 있지만 여기선 Google Fonts로 유사한 San Francisco 대체 사용)
 st.markdown("""
 <style>
-body {
-    font-family: 'Pretendard', sans-serif;
-    background-color: #fff;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+html, body, div, h1, h2, h3, p {
+    font-family: 'Roboto', sans-serif;
 }
-.header {
+.card-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 50px;
-    border-bottom: 1px solid #eee;
+    justify-content: space-around;
+    margin-top: 50px;
+    margin-bottom: 80px;
 }
-.logo {
-    font-size: 30px;
-    font-weight: bold;
-    color: black;
-}
-.logo span {
-    color: #f76c5e;
-    font-style: italic;
-}
-.menu {
-    display: flex;
-    gap: 20px;
-}
-.menu a {
-    font-weight: 500;
-    text-decoration: none;
-    color: #333;
-}
-.menu a:hover {
-    color: #f76c5e;
-}
-.banner {
-    background: linear-gradient(to right, #fff5f0, #fbe3db);
-    padding: 60px;
-    text-align: left;
-}
-.banner h1 {
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-.banner p {
-    font-size: 18px;
-    color: #444;
-}
-.button {
-    display: inline-block;
-    padding: 10px 30px;
-    background-color: #f76c5e;
-    color: white;
-    border-radius: 30px;
-    font-weight: bold;
-    margin-top: 20px;
+.card {
+    width: 45%;
+    background: #fff2ec;
+    padding: 20px;
+    border-radius: 25px;
     text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.card img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+.card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# HTML 구조
+# 이미지 로드
+recipe_img = Image.open("Mask group.png")
+sauce_img = Image.open("909090909 1.png")
+
+# 카드 섹션
 st.markdown("""
-<div class="header">
-    <div class="logo">TASTE <span>po</span></div>
-    <div class="menu">
-        <a href="#">카테고리</a>
-        <a href="#">신상품</a>
-        <a href="#">베스트</a>
-        <a href="#">리뷰</a>
-        <a href="#">이벤트</a>
-        <a href="#">테이스트포 소개</a>
-        <a href="#">로그인</a>
-        <a href="#">회원가입</a>
+<div class="card-container">
+    <div class="card">
+        <img src="data:image/png;base64,%s" />
+        <h3>1인 가구를 위한 간편 레시피</h3>
+    </div>
+    <div class="card">
+        <img src="data:image/png;base64,%s" />
+        <h3>1인 가구를 위한 소분형 소스</h3>
     </div>
 </div>
-
-<div class="banner">
-    <h1>1인 가구를 위한 소분형 소스 솔루션</h1>
-    <p>모바일로도 만나보세요!</p>
-    <div class="button">더 알아보기</div>
-</div>
-""", unsafe_allow_html=True)
+""" % (
+    base64.b64encode(recipe_img.tobytes()).decode("utf-8"),
+    base64.b64encode(sauce_img.tobytes()).decode("utf-8")
+), unsafe_allow_html=True)
