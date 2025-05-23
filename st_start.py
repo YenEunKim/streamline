@@ -19,17 +19,6 @@ with st.container():
 
 st.markdown("---")
 
-# 이미지 갤러리
-with st.container():
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.image("image1.jpg", use_column_width=True)
-    with col2:
-        st.image("image2.jpg", use_column_width=True)
-    with col3:
-        st.image("image3.jpg", use_column_width=True)
-    with col4:
-        st.image("image4.jpg", use_column_width=True)
 
 st.markdown("---")
 
