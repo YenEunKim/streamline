@@ -1,62 +1,122 @@
 import streamlit as st
 from PIL import Image
-import base64
+import os
 
-# 페이지 설정
 st.set_page_config(page_title="TASTE pro", layout="wide")
 
-# SF Pro 폰트 적용 (base64로 가져올 수도 있지만 여기선 Google Fonts로 유사한 San Francisco 대체 사용)
+# ----------- CSS 스타일 -----------
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-html, body, div, h1, h2, h3, p {
+body, html {
     font-family: 'Roboto', sans-serif;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #eee;
+}
+.menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+.menu a:hover {
+    color: #f76c5e;
+}
+.icons img {
+    margin-left: 15px;
+    width: 22px;
+}
+.banner {
+    display: flex;
+    padding: 60px 40px;
+    background: #fff5f0;
+    border-radius: 15px;
+    margin: 30px;
+}
+.banner-text {
+    flex: 1;
+    padding-right: 40px;
+}
+.banner-text h1 {
+    font-size: 32px;
+}
+.banner-text p {
+    font-size: 16px;
+    color: #555;
+}
+.banner-button {
+    background-color: #f76c5e;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
 }
 .card-container {
     display: flex;
     justify-content: space-around;
-    margin-top: 50px;
-    margin-bottom: 80px;
+    margin: 50px 40px;
 }
 .card {
-    width: 45%;
-    background: #fff2ec;
+    background-color: #fff1ea;
+    border-radius: 20px;
     padding: 20px;
-    border-radius: 25px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    width: 45%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 .card img {
     width: 100%;
-    border-radius: 20px;
-    margin-bottom: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
 }
-.card h3 {
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
+footer {
+    background-color: #fefefe;
+    padding: 30px 40px;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# 이미지 로드
-recipe_img = Image.open("Mask group.png")
-sauce_img = Image.open("909090909 1.png")
+# ----------- 이미지 경로 로드 -----------
+def load_image(name):
+    return Image.open(os.path.join("images", name))
 
-# 카드 섹션
-st.markdown("""
-<div class="card-container">
-    <div class="card">
-        <img src="data:image/png;base64,%s" />
-        <h3>1인 가구를 위한 간편 레시피</h3>
+# ----------- 헤더 네비게이션 -----------
+col1, col2, col3 = st.columns([1, 6, 1])
+with col1:
+    st.image(load_image("logo.png"), width=120)
+with col2:
+    st.markdown("""
+    <div class="menu">
+        <a href="#">카테고리</a>
+        <a href="#">신상품</a>
+        <a href="#">베스트</a>
+        <a href="#">리뷰</a>
+        <a href="#">이벤트</a>
+        <a href="#">테이스트포 소개</a>
     </div>
-    <div class="card">
-        <img src="data:image/png;base64,%s" />
-        <h3>1인 가구를 위한 소분형 소스</h3>
+    """, unsafe_allow_html=True)
+with col3:
+    st.markdown("""
+    <div class="icons">
+        <img src="images/icon_search.png">
+        <img src="images/icon_cart.png">
+        <img src="images/icon_user.png">
     </div>
-</div>
-""" % (
-    base64.b64encode(recipe_img.tobytes()).decode("utf-8"),
-    base64.b64encode(sauce_img.tobytes()).decode("utf-8")
-), unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
