@@ -61,13 +61,13 @@ if st.session_state.page == "main":
         with col1:
             if st.button(" ", key="photo1_btn"):
                 st.session_state.page = "photo1"
-            st.image("data/1.png", use_column_width=True)
+            st.image("data/1.png", use_container_width=True)
         with col2:
-            st.image("data/2.png", use_column_width=True)
+            st.image("data/2.png", use_container_width=True)
         with col3:
-            st.image("data/3.png", use_column_width=True)
+            st.image("data/3.png", use_container_width=True)
         with col4:
-            st.image("data/4.png", use_column_width=True)
+            st.image("data/4.png", use_container_width=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -93,15 +93,15 @@ elif st.session_state.page == "photo1":
     # 상세 이미지
     col1, col2 = st.columns(2)
     with col1:
-        st.image("data/1-1.png", use_column_width=True)
+        st.image("data/1-1.png", use_container_width=True)
     with col2:
-        st.image("data/1-2.png", use_column_width=True)
+        st.image("data/1-2.png", use_container_width=True)
 
     col3, col4 = st.columns(2)
     with col3:
-        st.image("data/1-3.png", use_column_width=True)
+        st.image("data/1-3.png", use_container_width=True)
     with col4:
-        st.image("data/1-4.png", use_column_width=True)
+        st.image("data/1-4.png", use_container_width=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
