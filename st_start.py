@@ -1,77 +1,42 @@
 import streamlit as st
 
-# 페이지 설정 (중복 없이 맨 위에서 한 번만)
 st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
-# 사용자 정의 스타일
-st.markdown("""
-    <style>
-    html, body, [class*="css"] {
-        font-family: 'Helvetica Neue', sans-serif;
-        background-color: white;
-        color: #000;
-    }
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-    .stTextInput>div>div>input {
-        background-color: white;
-        border: none;
-        border-bottom: 1px solid #ccc;
-    }
-    .gallery-img img {
-        height: 300px;
-        object-fit: cover;
-        width: 100%;
-    }
-    hr {
-        border: none;
-        border-top: 1px solid #ccc;
-        margin: 2em 0;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# 세션 상태를 활용한 페이지 전환
+# 페이지 전환용 세션 변수
 if "page" not in st.session_state:
     st.session_state.page = "main"
 
-# ⬇️ MAIN PAGE
+def go_to(page_name):
+    st.session_state.page = page_name
+
+# 메인 페이지
 if st.session_state.page == "main":
-    # 상단 네비게이션
-    with st.container():
-        cols = st.columns([1, 1, 1, 4, 1])
-        with cols[0]:
-            st.markdown("**Works**")
-        with cols[1]:
-            st.markdown("**About**")
-        with cols[2]:
-            st.markdown("**Contact**")
-        with cols[3]:
-            st.markdown("<h3 style='text-align: center;'>Ye Eun.</h3>", unsafe_allow_html=True)
-        with cols[4]:
-            st.text_input("Search")
+    st.markdown("""
+        <div style='text-align: center; font-size: 24px; font-weight: bold;'>Ye Eun.</div>
+        <hr>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        if st.button(" ", key="btn1"):
+            go_to("photo1")
+        st.image("data/1.png", use_container_width=True)
+    with col2:
+        if st.button(" ", key="btn2"):
+            go_to("photo2")
+        st.image("data/2.png", use_container_width=True)
+    with col3:
+        if st.button(" ", key="btn3"):
+            go_to("photo3")
+        st.image("data/3.png", use_container_width=True)
+    with col4:
+        if st.button(" ", key="btn4"):
+            go_to("photo4")
+        st.image("data/4.png", use_container_width=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # 이미지 갤러리 (1번만 버튼으로 클릭 가능)
-    with st.container():
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            if st.button(" ", key="photo1_btn"):
-                st.session_state.page = "photo1"
-            st.image("data/1.png", use_container_width=True)
-        with col2:
-            st.image("data/2.png", use_container_width=True)
-        with col3:
-            st.image("data/3.png", use_container_width=True)
-        with col4:
-            st.image("data/4.png", use_container_width=True)
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    # 자기소개 텍스트
     st.markdown("""
     <h2 style='text-align: center;'>Ye Eun Kim.</h2>
     <p style='text-align: center;'>
@@ -80,40 +45,68 @@ if st.session_state.page == "main":
     </p>
     """, unsafe_allow_html=True)
 
-# ⬇️ DETAIL PAGE
+# 상세 페이지 1
 elif st.session_state.page == "photo1":
-    st.markdown("""
-    <div style='text-align: center; font-size: 24px; font-weight: bold; margin-top: 10px; margin-bottom: 10px;'>
-        Ye Eun.
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    # 상세 이미지
+    st.markdown("## Ye Eun.")
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/1-1.png", use_container_width=True)
     with col2:
         st.image("data/1-2.png", use_container_width=True)
-
     col3, col4 = st.columns(2)
     with col3:
         st.image("data/1-3.png", use_container_width=True)
     with col4:
         st.image("data/1-4.png", use_container_width=True)
 
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("### Contact.")
+    st.write("anna08060@gmail.com")
+    st.write("instagram")
+    if st.button("Back", key="back1"):
+        go_to("main")
 
-    # Contact 정보
-    st.markdown("""
-    <h3 style='text-align: center;'>Contact.</h3>
-    <p style='text-align: center;'>
-    anna08060@gmail.com<br>
-    instagram
-    </p>
-    """, unsafe_allow_html=True)
+# 상세 페이지 2
+elif st.session_state.page == "photo2":
+    st.markdown("## Ye Eun.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image("data/2-1.png", use_container_width=True)
+    with col2:
+        st.image("data/2-2.png", use_container_width=True)
+    col3, col4 = st.columns(2)
+    with col3:
+        st.image("data/2-3.png", use_container_width=True)
+    with col4:
+        st.image("data/2-4.png", use_container_width=True)
 
-    # 뒤로 가기 버튼
-    if st.button("Back to Home"):
-        st.session_state.page = "main"
+    st.markdown("### Contact.")
+    st.write("anna08060@gmail.com")
+    st.write("instagram")
+    if st.button("Back", key="back2"):
+        go_to("main")
+
+# 상세 페이지 3
+elif st.session_state.page == "photo3":
+    st.markdown("## Ye Eun.")
+    st.image("data/3-1.png", use_container_width=True)
+
+    st.markdown("### Contact.")
+    st.write("anna08060@gmail.com")
+    st.write("instagram")
+    if st.button("Back", key="back3"):
+        go_to("main")
+
+# 상세 페이지 4
+elif st.session_state.page == "photo4":
+    st.markdown("## Ye Eun.")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image("data/4-1.png", use_container_width=True)
+    with col2:
+        st.image("data/4-2.png", use_container_width=True)
+
+    st.markdown("### Contact.")
+    st.write("anna08060@gmail.com")
+    st.write("instagram")
+    if st.button("Back", key="back4"):
+        go_to("main")
