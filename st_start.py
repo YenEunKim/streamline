@@ -69,10 +69,10 @@ elif st.session_state.page == "photo2":
 
     # 🎥 비디오 상단 재생
     try:
-        with open("data/영상.mp4", "rb") as video_file:
+        with open("data/video.mp4", "rb") as video_file:
             st.video(video_file.read())
     except FileNotFoundError:
-        st.warning("비디오 파일(data/영상.mp4)을 찾을 수 없습니다.")
+        st.warning("비디오 파일(data/video.mp4)을 찾을 수 없습니다.")
 
     col1, col2 = st.columns(2)
     with col1:
