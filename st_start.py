@@ -18,32 +18,23 @@ if st.session_state.page == "main":
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        # HTML 링크 클릭 시 세션값 변경을 위해 버튼처럼 꾸민 마크다운 링크 사용
-        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo1\"'><p style='text-align:center; color:gray;'>Photography</p></a>", unsafe_allow_html=True):
-            pass
-        if st.query_params.get("page") == "photo1":
-            st.session_state.page = "photo1"
+        if st.button("← Press to see the Photography", key="photo1"):
+            go_to("photo1")
         st.image("data/1.png", use_container_width=True)
 
     with col2:
-        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo2\"'><p style='text-align:center; color:gray;'>Video</p></a>", unsafe_allow_html=True):
-            pass
-        if st.query_params.get("page") == "photo2":
-            st.session_state.page = "photo2"
+        if st.button("← Press to watch the Video", key="photo2"):
+            go_to("photo2")
         st.image("data/2.png", use_container_width=True)
 
     with col3:
-        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo3\"'><p style='text-align:center; color:gray;'>Typography</p></a>", unsafe_allow_html=True):
-            pass
-        if st.query_params.get("page") == "photo3":
-            st.session_state.page = "photo3"
+        if st.button("← Press for Typography", key="photo3"):
+            go_to("photo3")
         st.image("data/3.png", use_container_width=True)
 
     with col4:
-        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo4\"'><p style='text-align:center; color:gray;'>Branding</p></a>", unsafe_allow_html=True):
-            pass
-        if st.query_params.get("page") == "photo4":
-            st.session_state.page = "photo4"
+        if st.button("← Press to view the Branding", key="photo4"):
+            go_to("photo4")
         st.image("data/4.png", use_container_width=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
