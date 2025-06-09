@@ -58,7 +58,7 @@ elif st.session_state.page == "photo1":
 
     st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
-    st.write("instagram")
+    st.write("instagram @yenni__s2")
 
     if st.button("Back", key="back1"):
         go_to("main")
@@ -87,7 +87,7 @@ elif st.session_state.page == "photo2":
 
     st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
-    st.write("instagram")
+    st.write("instagram @yenni__s2")
 
     if st.button("Back", key="back2"):
         go_to("main")
@@ -99,7 +99,7 @@ elif st.session_state.page == "photo3":
 
     st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
-    st.write("instagram")
+    st.write("instagram @yenni__s2")
 
     if st.button("Back", key="back3"):
         go_to("main")
@@ -115,7 +115,7 @@ elif st.session_state.page == "photo4":
 
     st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
-    st.write("instagram")
+    st.write("instagram @yenni__s2")
 
     if st.button("Back", key="back4"):
         go_to("main")
