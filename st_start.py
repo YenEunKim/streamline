@@ -2,55 +2,58 @@ import streamlit as st
 
 st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
-
-# 페이지 전환용 세션 변수
+# 페이지 상태 관리
 if "page" not in st.session_state:
     st.session_state.page = "main"
 
 def go_to(page_name):
     st.session_state.page = page_name
 
-# 메인 페이지
+# 쿼리 파라미터 방식 대신 세션 방식 유지
+
+# MAIN PAGE
 if st.session_state.page == "main":
-    st.markdown("""
-        <div style='text-align: center; font-size: 24px; font-weight: bold;'>Ye Eun.</div>
-        <hr>
-    """, unsafe_allow_html=True)
+    st.markdown("<div style='text-align:center; font-size: 24px; font-weight: bold;'>Ye Eun.</div><hr>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.markdown("<p style='text-align:center; color:gray;'>← Press to see the Photography</p>", unsafe_allow_html=True)
-        if st.button(" ", key="btn1"):
-            go_to("photo1")
+        # HTML 링크 클릭 시 세션값 변경을 위해 버튼처럼 꾸민 마크다운 링크 사용
+        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo1\"'><p style='text-align:center; color:gray;'>Photography</p></a>", unsafe_allow_html=True):
+            pass
+        if st.query_params.get("page") == "photo1":
+            st.session_state.page = "photo1"
         st.image("data/1.png", use_container_width=True)
 
     with col2:
-        st.markdown("<p style='text-align:center; color:gray;'>← Press to watch the Video</p>", unsafe_allow_html=True)
-        if st.button(" ", key="btn2"):
-            go_to("photo2")
+        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo2\"'><p style='text-align:center; color:gray;'>Video</p></a>", unsafe_allow_html=True):
+            pass
+        if st.query_params.get("page") == "photo2":
+            st.session_state.page = "photo2"
         st.image("data/2.png", use_container_width=True)
 
     with col3:
-        st.markdown("<p style='text-align:center; color:gray;'>← Press for Typography</p>", unsafe_allow_html=True)
-        if st.button(" ", key="btn3"):
-            go_to("photo3")
+        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo3\"'><p style='text-align:center; color:gray;'>Typography</p></a>", unsafe_allow_html=True):
+            pass
+        if st.query_params.get("page") == "photo3":
+            st.session_state.page = "photo3"
         st.image("data/3.png", use_container_width=True)
 
     with col4:
-        st.markdown("<p style='text-align:center; color:gray;'>← Press to view the Branding</p>", unsafe_allow_html=True)
-        if st.button(" ", key="btn4"):
-            go_to("photo4")
+        if st.markdown("<a href='#' style='text-decoration:none;' onclick='window.location.search=\"?page=photo4\"'><p style='text-align:center; color:gray;'>Branding</p></a>", unsafe_allow_html=True):
+            pass
+        if st.query_params.get("page") == "photo4":
+            st.session_state.page = "photo4"
         st.image("data/4.png", use_container_width=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
     st.markdown("""
-    <h2 style='text-align: center;'>Ye Eun Kim.</h2>
-    <p style='text-align: center;'>
-    Yeeun Kim is a designer based in Seoul, Korea. Interested in photography, video, typography, and branding.<br>
-    Majoring visual communication design at Hongik University.
-    </p>
+        <h2 style='text-align: center;'>Ye Eun Kim.</h2>
+        <p style='text-align: center;'>
+        Yeeun Kim is a designer based in Seoul, Korea. Interested in photography, video, typography, and branding.<br>
+        Majoring visual communication design at Hongik University.
+        </p>
     """, unsafe_allow_html=True)
 
 # 상세 페이지 1
