@@ -12,32 +12,38 @@ def go_to(page_name):
 # 쿼리 파라미터 방식 대신 세션 방식 유지
 
 # MAIN PAGE
+if st.button(" ", key="photo1"):
+    go_to("photo1")
+st.markdown("<p style='text-align:center;'>Photography</p>", unsafe_allow_html=True)
+st.image("data/1.png", use_container_width=True)
 if st.session_state.page == "main":
     st.markdown("<div style='text-align:center; font-size: 24px; font-weight: bold;'>Ye Eun.</div><hr>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        if st.button("← Press to see the Photography", key="photo1"):
+        if st.button("Photography", key="photo1"):
             go_to("photo1")
         st.image("data/1.png", use_container_width=True)
 
     with col2:
-        if st.button("← Press to watch the Video", key="photo2"):
+        if st.button("Video", key="photo2"):
             go_to("photo2")
         st.image("data/2.png", use_container_width=True)
 
     with col3:
-        if st.button("← Press for Typography", key="photo3"):
+        if st.button("Typography", key="photo3"):
             go_to("photo3")
         st.image("data/3.png", use_container_width=True)
 
     with col4:
-        if st.button("← Press to view the Branding", key="photo4"):
+        if st.button("Branding", key="photo4"):
             go_to("photo4")
         st.image("data/4.png", use_container_width=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
+
+    
 
     st.markdown("""
         <h2 style='text-align: center;'>Ye Eun Kim.</h2>
