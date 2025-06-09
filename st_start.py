@@ -12,10 +12,6 @@ def go_to(page_name):
 # 쿼리 파라미터 방식 대신 세션 방식 유지
 
 # MAIN PAGE
-if st.button(" ", key="photo1"):
-    go_to("photo1")
-st.markdown("<p style='text-align:center;'>Photography</p>", unsafe_allow_html=True)
-st.image("data/1.png", use_container_width=True)
 if st.session_state.page == "main":
     st.markdown("<div style='text-align:center; font-size: 24px; font-weight: bold;'>Ye Eun.</div><hr>", unsafe_allow_html=True)
 
