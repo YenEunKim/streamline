@@ -2,6 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
+
 # 페이지 전환용 세션 변수
 if "page" not in st.session_state:
     st.session_state.page = "main"
@@ -18,7 +19,7 @@ if st.session_state.page == "main":
 
     col1, col2, col3, col4 = st.columns(4)
 
-   with col1:
+    with col1:
         st.markdown("<p style='text-align:center; color:gray;'>← Press to see the Photography</p>", unsafe_allow_html=True)
         if st.button(" ", key="btn1"):
             go_to("photo1")
