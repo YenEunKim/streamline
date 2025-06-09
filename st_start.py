@@ -2,45 +2,12 @@ import streamlit as st
 
 st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
-# 상태 관리
+# 페이지 상태 관리
 if "page" not in st.session_state:
     st.session_state.page = "main"
 
 def go_to(page_name):
     st.session_state.page = page_name
-
-# CSS 스타일 정의
-st.markdown("""
-    <style>
-    .image-box {
-        position: relative;
-        width: 100%;
-        height: auto;
-    }
-    .image-box img {
-        width: 100%;
-        height: auto;
-        border-radius: 4px;
-    }
-    .centered-button {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0.6);
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 12px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    .centered-button:hover {
-        background-color: rgba(255,255,255,0.9);
-        color: black;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 # 메인 페이지
 if st.session_state.page == "main":
@@ -48,29 +15,42 @@ if st.session_state.page == "main":
 
     col1, col2, col3, col4 = st.columns(4)
 
-    for i, (col, label, img, target) in enumerate(zip(
+    # 한 줄로 반복문 처리
+    for i, (col, label, img_path, target) in enumerate(zip(
         [col1, col2, col3, col4],
         ["Photography", "Video", "Typography", "Branding"],
         ["data/1.png", "data/2.png", "data/3.png", "data/4.png"],
         ["photo1", "photo2", "photo3", "photo4"]
     )):
         with col:
-            # Streamlit이 실제 클릭 처리를 하도록 숨은 버튼 생성
-            if st.button(label, key=f"btn_{i}", help=label):
-                go_to(target)
+            # 이미지 표시
+            st.image(img_path, use_container_width=True)
 
-            # 실제 보이는 부분은 HTML 마크업
+            # HTML 버튼 가운데 정렬
             st.markdown(f"""
-            <div class="image-box">
-                <img src="{img}">
-                <form action="" method="post">
-                    <button name="fake_btn_{i}" class="centered-button">{label}</button>
-                </form>
-            </div>
+                <div style='text-align: center; margin-top: 0.5em;'>
+                    <form action="" method="post">
+                        <button name="btn_{i}" style="
+                            background-color: #333;
+                            color: white;
+                            padding: 8px 18px;
+                            font-size: 14px;
+                            border: none;
+                            border-radius: 10px;
+                            cursor: pointer;">
+                            {label}
+                        </button>
+                    </form>
+                </div>
             """, unsafe_allow_html=True)
+
+            # 버튼 클릭 처리
+            if st.session_state.get(f"btn_{i}"):
+                go_to(target)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
+    # 자기소개
     st.markdown("""
         <h2 style='text-align: center;'>Ye Eun Kim.</h2>
         <p style='text-align: center;'>
@@ -78,6 +58,7 @@ if st.session_state.page == "main":
         Majoring visual communication design at Hongik University.
         </p>
     """, unsafe_allow_html=True)
+
 # 상세 페이지 1
 elif st.session_state.page == "photo1":
     st.markdown("## Ye Eun.")
