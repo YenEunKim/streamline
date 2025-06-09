@@ -18,19 +18,26 @@ if st.session_state.page == "main":
 
     col1, col2, col3, col4 = st.columns(4)
 
-    with col1:
+   with col1:
+        st.markdown("<p style='text-align:center; color:gray;'>← Press to see the Photography</p>", unsafe_allow_html=True)
         if st.button(" ", key="btn1"):
             go_to("photo1")
         st.image("data/1.png", use_container_width=True)
+
     with col2:
+        st.markdown("<p style='text-align:center; color:gray;'>← Press to watch the Video</p>", unsafe_allow_html=True)
         if st.button(" ", key="btn2"):
             go_to("photo2")
         st.image("data/2.png", use_container_width=True)
+
     with col3:
+        st.markdown("<p style='text-align:center; color:gray;'>← Press for Typography</p>", unsafe_allow_html=True)
         if st.button(" ", key="btn3"):
             go_to("photo3")
         st.image("data/3.png", use_container_width=True)
+
     with col4:
+        st.markdown("<p style='text-align:center; color:gray;'>← Press to view the Branding</p>", unsafe_allow_html=True)
         if st.button(" ", key="btn4"):
             go_to("photo4")
         st.image("data/4.png", use_container_width=True)
