@@ -50,7 +50,7 @@ if st.session_state.page == "main":
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # ----------------- 소개 -----------------
+    # --- 소개 ---
     st.markdown("""
         <h2 style='text-align: center;'>Ye Eun Kim.</h2>
         <p style='text-align: center;'>
@@ -59,9 +59,13 @@ if st.session_state.page == "main":
         </p>
     """, unsafe_allow_html=True)
 
-    # ----------------- SKILL -----------------
+    # ✅ 간격 추가
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
+
+    # --- SKILL 시각화 섹션 ---
     st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
 
+    # 데이터 정의
     skills = {
         "Adobe Photoshop": 90,
         "Adobe Illustration": 95,
@@ -76,13 +80,15 @@ if st.session_state.page == "main":
         "Skill": list(skills.values())
     })
 
+    # ✅ 색상: 다크모드에서도 잘 보이도록 흰색으로
     chart = alt.Chart(df).mark_bar(size=30).encode(
         x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
-        color=alt.value("black")
+        color=alt.value("#FFFFFF")  # 흰색
     ).properties(width=700, height=300)
 
     st.altair_chart(chart, use_container_width=True)
+
 
     # ----------------- Contact -----------------
     st.markdown("""
