@@ -17,40 +17,20 @@ if st.session_state.page == "main":
 
     col1, col2, col3, col4 = st.columns(4)
 
-    for i, (col, label, img_path, page_name) in enumerate(zip(
+    for col, label, img_path, page_name in zip(
         [col1, col2, col3, col4],
         ["Photography", "Video", "Typography", "Branding"],
         ["data/1.png", "data/2.png", "data/3.png", "data/4.png"],
         ["photo1", "photo2", "photo3", "photo4"]
-    )):
+    ):
         with col:
             st.image(img_path, use_container_width=True)
-
-            # 버튼 중앙 정렬 + 작게
-            button_clicked = st.markdown(f"""
-                <div style='text-align:center; margin-top: 10px;'>
-                    <form action="" method="post">
-                        <button type="submit" name="page" value="{page_name}" style="
-                            background-color: #333;
-                            color: white;
-                            padding: 5px 12px;
-                            font-size: 11px;
-                            border: none;
-                            border-radius: 8px;
-                            cursor: pointer;">
-                            {label}
-                        </button>
-                    </form>
-                </div>
-            """, unsafe_allow_html=True)
-
-    # 세션 변경 감지
-    if "page" in st.query_params:
-        go_to(st.query_params["page"])
+            if st.button(label, key=page_name):
+                go_to(page_name)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # --- 소개 ---
+    # 소개 섹션
     st.markdown("""
         <h2 style='text-align: center;'>Ye Eun Kim.</h2>
         <p style='text-align: center;'>
@@ -59,13 +39,11 @@ if st.session_state.page == "main":
         </p>
     """, unsafe_allow_html=True)
 
-    # ✅ 간격 추가
-    st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-    # --- SKILL 시각화 섹션 ---
+    # SKILL 섹션
     st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
 
-    # 데이터 정의
     skills = {
         "Adobe Photoshop": 90,
         "Adobe Illustration": 95,
@@ -80,26 +58,25 @@ if st.session_state.page == "main":
         "Skill": list(skills.values())
     })
 
-    # ✅ 색상
     chart = alt.Chart(df).mark_bar(size=20).encode(
         x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
         color=alt.value("#666666")
-    ).properties(width=500, height=500)
+    ).properties(width=600, height=400)
 
     st.altair_chart(chart, use_container_width=True)
 
-
-    # ----------------- Contact -----------------
+    # Contact
     st.markdown("""
         <br><br>
-        <h3 style='text-align: center;'>Contact.</h3>
+        <h3 style='text-align: center;'>Contact</h3>
         <p style='text-align: center;'>anna08060@gmail.com<br>instagram @yenni__s2</p>
     """, unsafe_allow_html=True)
 
-# ----------------- 상세 페이지들 -----------------
+
+# ----------------- 상세 페이지: Photography -----------------
 elif st.session_state.page == "photo1":
-    st.markdown("## Ye Eun.")
+    st.markdown("## Photography")
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/1-1.png", use_container_width=True)
@@ -111,19 +88,22 @@ elif st.session_state.page == "photo1":
     with col4:
         st.image("data/1-4.png", use_container_width=True)
 
-    st.markdown("### Contact.")
+    st.markdown("### Contact")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back"):
+    if st.button("Back to Main"):
         go_to("main")
 
+
+# ----------------- 상세 페이지: Video -----------------
 elif st.session_state.page == "photo2":
-    st.markdown("## Ye Eun.")
+    st.markdown("## Video")
+
     try:
         with open("data/video.mp4", "rb") as f:
             st.video(f.read())
-    except:
+    except FileNotFoundError:
         st.warning("비디오 파일이 없습니다.")
 
     col1, col2 = st.columns(2)
@@ -137,33 +117,40 @@ elif st.session_state.page == "photo2":
     with col4:
         st.image("data/2-4.png", use_container_width=True)
 
-    st.markdown("### Contact.")
+    st.markdown("### Contact")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back"):
+    if st.button("Back to Main"):
         go_to("main")
 
+
+# ----------------- 상세 페이지: Typography -----------------
 elif st.session_state.page == "photo3":
-    st.markdown("## Ye Eun.")
+    st.markdown("## Typography")
     st.image("data/3-1.png", use_container_width=True)
-    st.markdown("### Contact.")
+
+    st.markdown("### Contact")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
-    if st.button("Back"):
+
+    if st.button("Back to Main"):
         go_to("main")
 
+
+# ----------------- 상세 페이지: Branding -----------------
 elif st.session_state.page == "photo4":
-    st.markdown("## Ye Eun.")
+    st.markdown("## Branding")
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/4-1.png", use_container_width=True)
     with col2:
         st.image("data/4-2.png", use_container_width=True)
 
-    st.markdown("### Contact.")
+    st.markdown("### Contact")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back"):
+    if st.button("Back to Main"):
         go_to("main")
+
