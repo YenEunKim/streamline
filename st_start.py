@@ -1,4 +1,6 @@
 import streamlit as st
+import altair as alt
+import pandas as pd
 
 st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
@@ -41,46 +43,37 @@ if st.session_state.page == "main":
         Majoring visual communication design at Hongik University.
         </p>
     """, unsafe_allow_html=True)
-import altair as alt
-import pandas as pd
 
-# --- Skill 시각화 섹션 ---
-st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
+    # --- Skill 시각화 섹션 ---
+    st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
 
-# 데이터 정의 (0~100%)
-skills = {
-    "Adobe Photoshop": 90,
-    "Adobe Illustration": 95,
-    "Adobe After Effect": 30,
-    "Adobe Premiere Pro": 60,
-    "Adobe Indesign": 70,
-    "Figma": 90
-}
+    skills = {
+        "Adobe Photoshop": 90,
+        "Adobe Illustration": 95,
+        "Adobe After Effect": 30,
+        "Adobe Premiere Pro": 60,
+        "Adobe Indesign": 70,
+        "Figma": 90
+    }
 
-df = pd.DataFrame({
-    "Tool": list(skills.keys()),
-    "Skill": list(skills.values())
-})
+    df = pd.DataFrame({
+        "Tool": list(skills.keys()),
+        "Skill": list(skills.values())
+    })
 
-# Altair 수직 막대 그래프 (흑백 스타일)
-bar = alt.Chart(df).mark_bar(size=30).encode(
-    x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
-    y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
-    color=alt.value("black")
-).properties(
-    width=600,
-    height=300
-)
+    bar = alt.Chart(df).mark_bar(size=30).encode(
+        x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
+        y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
+        color=alt.value("black")
+    ).properties(width=600, height=300)
 
-# 그래프 출력
-st.altair_chart(bar, use_container_width=True)
+    st.altair_chart(bar, use_container_width=True)
 
-# Contact 아래쪽 텍스트
-st.markdown("""
-<br><br>
-<h3 style='text-align: center;'>Contact.</h3>
-<p style='text-align: center;'>anna08060@gmail.com<br>instagram</p>
-""", unsafe_allow_html=True)
+    st.markdown("""
+    <br><br>
+    <h3 style='text-align: center;'>Contact.</h3>
+    <p style='text-align: center;'>anna08060@gmail.com<br>instagram @yenni__s2</p>
+    """, unsafe_allow_html=True)
 
 # ---------- PHOTO 1 ----------
 elif st.session_state.page == "photo1":
@@ -107,7 +100,6 @@ elif st.session_state.page == "photo1":
 elif st.session_state.page == "photo2":
     st.markdown("## Ye Eun.")
 
-    # 🎥 비디오 상단 재생
     try:
         with open("data/video.mp4", "rb") as video_file:
             st.video(video_file.read())
