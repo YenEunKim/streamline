@@ -80,11 +80,11 @@ if st.session_state.page == "main":
         "Skill": list(skills.values())
     })
 
-    # ✅ 색상: 다크모드에서도 잘 보이도록 흰색으로
+    # ✅ 색상
     chart = alt.Chart(df).mark_bar(size=20).encode(
         x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
-        color=alt.value("#FFFFFF")  # 흰색
+        color=alt.value("#666666")
     ).properties(width=500, height=500)
 
     st.altair_chart(chart, use_container_width=True)
