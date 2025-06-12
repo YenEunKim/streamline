@@ -60,7 +60,7 @@ if st.session_state.page == "main":
     """, unsafe_allow_html=True)
 
     # ✅ 간격 추가
-    st.markdown("<br><br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
     # --- SKILL 시각화 섹션 ---
     st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
@@ -85,7 +85,7 @@ if st.session_state.page == "main":
         x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
         color=alt.value("#FFFFFF")  # 흰색
-    ).properties(width=700, height=300)
+    ).properties(width=500, height=200)
 
     st.altair_chart(chart, use_container_width=True)
 
