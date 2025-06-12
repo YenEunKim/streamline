@@ -4,21 +4,20 @@ import pandas as pd
 
 st.set_page_config(page_title="Ye Eun Kim", layout="wide")
 
-# 페이지 상태 관리
+# ----------------- 상태 관리 -----------------
 if "page" not in st.session_state:
     st.session_state.page = "main"
 
-def go_to(page_name):
-    st.session_state.page = page_name
+def go_to(page):
+    st.session_state.page = page
 
-# ---------- MAIN PAGE ----------
+# ----------------- MAIN PAGE -----------------
 if st.session_state.page == "main":
     st.markdown("<h2 style='text-align: center;'>Ye Eun.</h2><hr>", unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
 
-    # 이미지 + 버튼 반복 처리
-    for i, (col, label, img_path, target) in enumerate(zip(
+    for i, (col, label, img_path, page_name) in enumerate(zip(
         [col1, col2, col3, col4],
         ["Photography", "Video", "Typography", "Branding"],
         ["data/1.png", "data/2.png", "data/3.png", "data/4.png"],
@@ -27,15 +26,31 @@ if st.session_state.page == "main":
         with col:
             st.image(img_path, use_container_width=True)
 
-            # Streamlit 버튼을 가운데 정렬
-            st.markdown("<div style='text-align:center;'>", unsafe_allow_html=True)
-            if st.button(label, key=f"btn_{i}"):
-                go_to(target)
-            st.markdown("</div>", unsafe_allow_html=True)
+            # 버튼 중앙 정렬 + 작게
+            button_clicked = st.markdown(f"""
+                <div style='text-align:center; margin-top: 10px;'>
+                    <form action="" method="post">
+                        <button type="submit" name="page" value="{page_name}" style="
+                            background-color: #333;
+                            color: white;
+                            padding: 5px 12px;
+                            font-size: 11px;
+                            border: none;
+                            border-radius: 8px;
+                            cursor: pointer;">
+                            {label}
+                        </button>
+                    </form>
+                </div>
+            """, unsafe_allow_html=True)
+
+    # 세션 변경 감지
+    if "page" in st.experimental_get_query_params():
+        go_to(st.experimental_get_query_params()["page"][0])
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # 자기소개
+    # ----------------- 소개 -----------------
     st.markdown("""
         <h2 style='text-align: center;'>Ye Eun Kim.</h2>
         <p style='text-align: center;'>
@@ -44,7 +59,7 @@ if st.session_state.page == "main":
         </p>
     """, unsafe_allow_html=True)
 
-    # --- Skill 시각화 섹션 ---
+    # ----------------- SKILL -----------------
     st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
 
     skills = {
@@ -61,21 +76,22 @@ if st.session_state.page == "main":
         "Skill": list(skills.values())
     })
 
-    bar = alt.Chart(df).mark_bar(size=30).encode(
+    chart = alt.Chart(df).mark_bar(size=30).encode(
         x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
         color=alt.value("black")
-    ).properties(width=600, height=300)
+    ).properties(width=700, height=300)
 
-    st.altair_chart(bar, use_container_width=True)
+    st.altair_chart(chart, use_container_width=True)
 
+    # ----------------- Contact -----------------
     st.markdown("""
-    <br><br>
-    <h3 style='text-align: center;'>Contact.</h3>
-    <p style='text-align: center;'>anna08060@gmail.com<br>instagram @yenni__s2</p>
+        <br><br>
+        <h3 style='text-align: center;'>Contact.</h3>
+        <p style='text-align: center;'>anna08060@gmail.com<br>instagram @yenni__s2</p>
     """, unsafe_allow_html=True)
 
-# ---------- PHOTO 1 ----------
+# ----------------- 상세 페이지들 -----------------
 elif st.session_state.page == "photo1":
     st.markdown("## Ye Eun.")
     col1, col2 = st.columns(2)
@@ -93,18 +109,16 @@ elif st.session_state.page == "photo1":
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back", key="back1"):
+    if st.button("Back"):
         go_to("main")
 
-# ---------- PHOTO 2 (Video 포함) ----------
 elif st.session_state.page == "photo2":
     st.markdown("## Ye Eun.")
-
     try:
-        with open("data/video.mp4", "rb") as video_file:
-            st.video(video_file.read())
-    except FileNotFoundError:
-        st.warning("비디오 파일(data/video.mp4)을 찾을 수 없습니다.")
+        with open("data/video.mp4", "rb") as f:
+            st.video(f.read())
+    except:
+        st.warning("비디오 파일이 없습니다.")
 
     col1, col2 = st.columns(2)
     with col1:
@@ -121,22 +135,18 @@ elif st.session_state.page == "photo2":
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back", key="back2"):
+    if st.button("Back"):
         go_to("main")
 
-# ---------- PHOTO 3 ----------
 elif st.session_state.page == "photo3":
     st.markdown("## Ye Eun.")
     st.image("data/3-1.png", use_container_width=True)
-
     st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
-
-    if st.button("Back", key="back3"):
+    if st.button("Back"):
         go_to("main")
 
-# ---------- PHOTO 4 ----------
 elif st.session_state.page == "photo4":
     st.markdown("## Ye Eun.")
     col1, col2 = st.columns(2)
@@ -149,5 +159,5 @@ elif st.session_state.page == "photo4":
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back", key="back4"):
+    if st.button("Back"):
         go_to("main")
