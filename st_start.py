@@ -25,12 +25,31 @@ if st.session_state.page == "main":
     ):
         with col:
             st.image(img_path, use_container_width=True)
+
+            # 중앙 정렬 버튼 - HTML은 보여주는 용도, 실제 동작은 Streamlit 버튼으로 처리
+            st.markdown(f"""
+                <div style='text-align:center; margin-top: 10px;'>
+                    <button style="
+                        background-color: #333;
+                        color: white;
+                        padding: 5px 12px;
+                        font-size: 11px;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                    " onclick="window.location.href='#{page_name}'">
+                        {label}
+                    </button>
+                </div>
+            """, unsafe_allow_html=True)
+
+            # 실제 페이지 이동은 Streamlit 버튼으로 처리 (숨겨진 버튼, key로 구분)
             if st.button(label, key=page_name):
                 go_to(page_name)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # 소개 섹션
+    # 소개
     st.markdown("""
         <h2 style='text-align: center;'>Ye Eun Kim.</h2>
         <p style='text-align: center;'>
@@ -39,9 +58,9 @@ if st.session_state.page == "main":
         </p>
     """, unsafe_allow_html=True)
 
-    st.markdown("<br><br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
-    # SKILL 섹션
+    # SKILL
     st.markdown("<h2 style='text-align: center;'>SKILL</h2>", unsafe_allow_html=True)
 
     skills = {
@@ -62,21 +81,20 @@ if st.session_state.page == "main":
         x=alt.X("Tool", sort=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y("Skill", scale=alt.Scale(domain=[0, 100])),
         color=alt.value("#666666")
-    ).properties(width=600, height=400)
+    ).properties(width=500, height=500)
 
     st.altair_chart(chart, use_container_width=True)
 
     # Contact
     st.markdown("""
         <br><br>
-        <h3 style='text-align: center;'>Contact</h3>
+        <h3 style='text-align: center;'>Contact.</h3>
         <p style='text-align: center;'>anna08060@gmail.com<br>instagram @yenni__s2</p>
     """, unsafe_allow_html=True)
 
-
-# ----------------- 상세 페이지: Photography -----------------
+# ----------------- 상세 페이지들 -----------------
 elif st.session_state.page == "photo1":
-    st.markdown("## Photography")
+    st.markdown("## Ye Eun.")
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/1-1.png", use_container_width=True)
@@ -88,22 +106,19 @@ elif st.session_state.page == "photo1":
     with col4:
         st.image("data/1-4.png", use_container_width=True)
 
-    st.markdown("### Contact")
+    st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back to Main"):
+    if st.button("Back"):
         go_to("main")
 
-
-# ----------------- 상세 페이지: Video -----------------
 elif st.session_state.page == "photo2":
-    st.markdown("## Video")
-
+    st.markdown("## Ye Eun.")
     try:
         with open("data/video.mp4", "rb") as f:
             st.video(f.read())
-    except FileNotFoundError:
+    except:
         st.warning("비디오 파일이 없습니다.")
 
     col1, col2 = st.columns(2)
@@ -117,40 +132,33 @@ elif st.session_state.page == "photo2":
     with col4:
         st.image("data/2-4.png", use_container_width=True)
 
-    st.markdown("### Contact")
+    st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back to Main"):
+    if st.button("Back"):
         go_to("main")
 
-
-# ----------------- 상세 페이지: Typography -----------------
 elif st.session_state.page == "photo3":
-    st.markdown("## Typography")
+    st.markdown("## Ye Eun.")
     st.image("data/3-1.png", use_container_width=True)
-
-    st.markdown("### Contact")
+    st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
-
-    if st.button("Back to Main"):
+    if st.button("Back"):
         go_to("main")
 
-
-# ----------------- 상세 페이지: Branding -----------------
 elif st.session_state.page == "photo4":
-    st.markdown("## Branding")
+    st.markdown("## Ye Eun.")
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/4-1.png", use_container_width=True)
     with col2:
         st.image("data/4-2.png", use_container_width=True)
 
-    st.markdown("### Contact")
+    st.markdown("### Contact.")
     st.write("anna08060@gmail.com")
     st.write("instagram @yenni__s2")
 
-    if st.button("Back to Main"):
+    if st.button("Back"):
         go_to("main")
-
