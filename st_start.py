@@ -45,8 +45,8 @@ if st.session_state.page == "main":
             """, unsafe_allow_html=True)
 
     # 세션 변경 감지
-    if "page" in st.experimental_get_query_params():
-        go_to(st.experimental_get_query_params()["page"][0])
+    if "page" in st.query_params:
+        go_to(st.query_params["page"])
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
