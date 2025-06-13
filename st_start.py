@@ -77,6 +77,11 @@ if st.session_state.page == "main":
 # ----------------- 상세 페이지: Photography -----------------
 elif st.session_state.page == "photo1":
     st.markdown("## Photography")
+    st.markdown("""
+    <p style='text-align: center; font-size: 14px; color: gray;'>
+    A collection of photographic works exploring light, composition, and everyday narratives through still images.
+    </p>
+    """, unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/1-1.png", use_container_width=True)
@@ -99,6 +104,11 @@ elif st.session_state.page == "photo1":
 # ----------------- 상세 페이지: Video -----------------
 elif st.session_state.page == "photo2":
     st.markdown("## Video")
+    st.markdown("""
+    <p style='text-align: center; font-size: 14px; color: gray;'>
+    A selection of video projects focusing on storytelling, motion design, and visual rhythm across various formats.
+    </p>
+    """, unsafe_allow_html=True)
 
     try:
         with open("data/video.mp4", "rb") as f:
@@ -128,6 +138,11 @@ elif st.session_state.page == "photo2":
 # ----------------- 상세 페이지: Typography -----------------
 elif st.session_state.page == "photo3":
     st.markdown("## Typography")
+    st.markdown("""
+    <p style='text-align: center; font-size: 14px; color: gray;'>
+    Experimental and editorial typography work that investigates the structure, rhythm, and expressive potential of letterforms.
+    </p>
+    """, unsafe_allow_html=True)
     st.image("data/3-1.png", use_container_width=True)
 
     st.markdown("### Contact")
@@ -141,6 +156,11 @@ elif st.session_state.page == "photo3":
 # ----------------- 상세 페이지: Branding -----------------
 elif st.session_state.page == "photo4":
     st.markdown("## Branding")
+    st.markdown("""
+    <p style='text-align: center; font-size: 14px; color: gray;'>
+    Visual identity projects that involve logo design, color systems, and comprehensive brand storytelling across media.
+    </p>
+    """, unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         st.image("data/4-1.png", use_container_width=True)
